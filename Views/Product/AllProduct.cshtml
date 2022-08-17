@@ -1,0 +1,52 @@
+@model Product
+
+
+<div class="container w-75 mx-auto">
+    <h1>Product</h1>
+    <h1><a asp-controller="Category" asp-action="AllCategory">Category</a></h1>
+
+
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-center">New Product</h2>
+            <form class="shadow p-3 rounded" asp-controller="Product" asp-action="CreateProduct" method="POST">
+                <div class="mb-3">
+                    <label asp-for="Name" class="col-3"></label>
+                    <span asp-validation-for="Name" class="text-danger font-weight-bold">
+                    </span>
+                    <input class="form-control" asp-for="Name">
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Description"></label>
+                    <span asp-validation-for="Description" class="text-danger font-weight-bold">
+                    </span>
+                    <input class="form-control" asp-for="Description">
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Price"></label>
+                    <span asp-validation-for="Price" class="text-danger font-weight-bold">
+                    </span>
+                    <input class="form-control" asp-for="Price">
+
+                </div>
+                <button>Create</button>
+            </form>
+        </div>
+        <div class="col-6">
+            <h2 class="text-center">Existing Product</h2>
+
+            @foreach (Product product in ViewBag.allProductsList)
+            {
+                <p><a href="/products/@product.ProductId">@product.Name</a></p>
+            }
+        </div>
+
+
+
+
+    </div>
+
+
+</div>

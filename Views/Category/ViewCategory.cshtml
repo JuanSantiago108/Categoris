@@ -1,0 +1,30 @@
+@model Association
+<h1>@ViewBag.oneCategory.Name</h1>
+
+<h3>Product:</h3>
+<ul>
+    @foreach (Association asc in ViewBag.oneCategory.CategoryList)
+    {
+        if (asc.Product != null)
+        {
+            <p>@asc.Product.Name</p>
+        }
+    }
+</ul>
+
+<h3>Add Product</h3>
+<form class="shadow p-3 rounded" asp-action="CreateProductWithCategory" asp-controller="Category" asp-route-categoriesId="@ViewBag.oneCategory.CategoryId"  method="POST">
+    <div class="mb-3">
+        <label asp-for="ProductId"></label>
+        <span asp-validation-for="ProductId" class="text-danger font-weight-bold">
+        </span>
+        <select asp-for="ProductId">
+            <option selected hidden>Select</option>
+            @foreach (Product prod in ViewBag.productWithoutCategory)
+            {
+                <option value="@prod.ProductId">@prod.Name</option>
+            }
+        </select>
+    </div>
+    <button>Add </button>
+</form>
